@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu.unity
+    guid: 276b2b0a815469746b8958a2e006914c
+  - enabled: 1
+    path: Assets/Scenes/Moscow.unity
+    guid: fd89f7d6c596386468f2897aa9bbfe87
   m_configObjects: {}

@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 6ddc9ace5b1c9384683b1f4f37c2f0ec
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Rubik Light
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 8198964cf3846a24f8e98dca47e98757, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

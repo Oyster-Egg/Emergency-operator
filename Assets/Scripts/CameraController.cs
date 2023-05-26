@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
     public float rotation_amount;
     public Vector3 zoom_amount;
 
+    public Vector3 camZoom;
     public Vector3 newZoom;
     public Vector3 newPosition;
     public Quaternion newRotation;
@@ -24,6 +25,16 @@ public class CameraController : MonoBehaviour
     public Vector3 dragCurrentPosition;
     public Vector3 rotateStartPosition;
     public Vector3 rotateCurrentPosition;
+
+    // The target we are following
+    public Transform target;
+
+    // The smooth speed of the camera
+    public float smoothSpeed = 10f;
+
+    // The offset of the camera from the target
+    private Vector3 offset = new Vector3(0, 3000, -1700);
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +51,22 @@ public class CameraController : MonoBehaviour
     {
         if (follow_transform != null)
         {
-            transform.position = follow_transform.position;
+            // Create a ray from the camera to the mouse position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // Declare a variable to store the hit information
+            RaycastHit hit;
+
+            // Check if the ray hits any collider in the scene
+            if (Physics.Raycast(ray, out hit))
+            {
+                // Check if the collider belongs to a character (you can use tags or layers for this)
+                if (hit.collider.CompareTag("Car"))
+                {
+                    // Assign the collider's transform to the target variable
+                    target = hit.transform;
+                }
+            }
         }
         else
         {
@@ -50,8 +76,70 @@ public class CameraController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             follow_transform = null;
+            target = null;
+            camera_transform.localPosition = Vector3.Lerp(camera_transform.localPosition, camZoom, Time.deltaTime * movement_speed);
         }
-    }
+
+        // If we have a target
+        if (target != null)
+        {
+
+            // Set the position of the camera
+            camZoom = camera_transform.localPosition;
+            transform.position = target.position;
+            camera_transform.localPosition = Vector3.Lerp(camera_transform.localPosition, offset, Time.deltaTime * smoothSpeed);
+
+            // Make the camera look at the target
+            transform.LookAt(target);
+        }
+        }
+
+    
+       /* // Check if the left mouse button is clicked
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Create a ray from the camera to the mouse position
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            // Declare a variable to store the hit information
+            RaycastHit hit;
+
+            // Check if the ray hits any collider in the scene
+            if (Physics.Raycast(ray, out hit))
+            {
+                // Check if the collider belongs to a character (you can use tags or layers for this)
+                if (hit.collider.CompareTag("Car"))
+                {
+                    // Assign the collider's transform to the target variable
+                    target = hit.transform;
+                }
+            }
+        }
+
+        // If we have a target
+        if (target != null)
+        {
+
+            // Set the position of the camera
+            camZoom = camera_transform.localPosition;
+            transform.position = target.position;
+            camera_transform.localPosition = Vector3.Lerp(camera_transform.localPosition, offset, Time.deltaTime * smoothSpeed);
+
+            // Make the camera look at the target
+            transform.LookAt(target);
+        }
+        else
+        {
+            HandleMouseInput();
+            HandleMovementInput();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            target = null;
+            camera_transform.localPosition = Vector3.Lerp(camera_transform.localPosition,camZoom,Time.deltaTime * movement_speed);
+           
+        }
+    }*/
 
     void HandleMouseInput()
     { 

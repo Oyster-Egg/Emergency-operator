@@ -34,7 +34,7 @@ public class Patrol : MonoBehaviour
 
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.
-        destPoint = (destPoint + Random.Range(0, points.Length)) % points.Length;
+        destPoint = (destPoint + Random.Range(0,points.Length))%points.Length;
     }
 
 
@@ -44,11 +44,5 @@ public class Patrol : MonoBehaviour
         // close to the current one.
         if (!agent.pathPending && agent.remainingDistance < 20f)
             GotoNextPoint();
-    }
-
-    public void ChangeDestination()
-    {
-        destPoint = Random.Range(0, points.Length);
-        agent.destination = points[destPoint].position;
     }
 }

@@ -12,4 +12,8 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("Moscow");
     }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

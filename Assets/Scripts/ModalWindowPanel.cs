@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -139,5 +138,29 @@ public class ModalWindowPanel : MonoBehaviour
             _alternateButtonText.text = alternateButton;
             _alternateButton.onClick.AddListener(new UnityAction(alternateAction));
         }
+    }
+    public void Tutorial (string title, string text, Sprite Image, string confirmButton, UnityAction confirmAction, UnityAction declineAction, UnityAction alternateAction = null)
+    {
+        ModalWindowBox.SetActive(true);
+        Color color = _background.color;
+        color.a = 1;
+        _background.color = color;
+        _horizontalLayoutArea.gameObject.SetActive(true);
+        _verticalLayoutArea.gameObject.SetActive(false);
+        _contentArea.gameObject.SetActive(true);
+        bool hasTitle = string.IsNullOrEmpty(title);
+        _headerArea.gameObject.SetActive(hasTitle);
+        _iconImage.sprite = Image;
+        _titleField.text = title;
+        _iconText.text = text;
+        _declineButton.gameObject.SetActive(false);
+        _alternateButton.gameObject.SetActive(false);
+        if (confirmAction != null)
+        {
+            _confirmButton.gameObject.SetActive(true);
+            _confirmButtonText.text = confirmButton;
+            _confirmButton.onClick.AddListener(new UnityAction(confirmAction));
+        }
+        
     }
 }

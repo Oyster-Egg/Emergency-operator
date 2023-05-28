@@ -26,7 +26,8 @@ public class CallsScript : MonoBehaviour
     public string[] Psstrings; // Assign the possible strings in the inspector
     public string[] Hstrings;
     public string[] Nullstrings; // Assign the possible strings in the inspector
-    private string randomString; // Store the random picked string
+    public AudioSource Mumble;
+    public AudioSource Call;
 
     public float interval = 0.05f;
     public int times = 25;
@@ -63,6 +64,8 @@ public class CallsScript : MonoBehaviour
         bounce = false;
         Time.timeScale = 0;
         UIController.Instance.modalWindow.DialogWindow("Входящий вызов:", text, "Отправить машину", "Первая помощь", "Положить трубку", ResumeGameAction, CancelAction, AlternateAction);
+        Mumble.Play();
+        Call.Stop();
     }
     public void Bouncing(bool bounce)
     {
@@ -70,6 +73,7 @@ public class CallsScript : MonoBehaviour
         {   
             StartCoroutine(Blink());
             Debug.Log("Пук пук");
+            Call.Play();
         }
     }
     IEnumerator Blink()
@@ -161,6 +165,7 @@ public class CallsScript : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+        Mumble.Stop();
     }
     public void Decline()
     {
@@ -197,6 +202,7 @@ public class CallsScript : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+        Mumble.Stop();
     }
     public void Help()
     {
@@ -233,6 +239,7 @@ public class CallsScript : MonoBehaviour
         {
             Time.timeScale = 1;
         }
+        Mumble.Stop();
     }
 
 }

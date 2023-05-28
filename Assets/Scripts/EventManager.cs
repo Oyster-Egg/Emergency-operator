@@ -3,13 +3,15 @@ using System.Collections;
 
 public class EventManager : MonoBehaviour
 {
-    public GameEvent[] gameEvents; // Массив разных игровых событий
+    private string[] gameEvents = new string[7] { "Ambulance", "Firetruck", "GasService", "PoliceBig", "PoliceSmall", "Decline", "Help" }; // Массив разных игровых событий
     public float minDelay = 5f; // Минимальная задержка перед появлением события
     public float maxDelay = 10f; // Максимальная задержка перед появлением события
+    private CallsScript callsScript;
 
     private void Start()
     {
         StartCoroutine(SpawnRandomEventCoroutine());
+     
     }
 
     private IEnumerator SpawnRandomEventCoroutine()
@@ -31,24 +33,68 @@ public class EventManager : MonoBehaviour
             return;
         }
 
-        int randomIndex = Random.Range(0, gameEvents.Length);
-        GameEvent eventToSpawn = gameEvents[randomIndex];
+        
+
+       int randomIndex = Random.Range(0, gameEvents.Length);
+        if (randomIndex == 0) 
+        {
+            CallsScript.Instance.AssignedWindow(randomIndex);
+            CallsScript.Instance.Bouncing(true);
+            Debug.Log("0");
+        }
+        else if (randomIndex == 1)
+        {
+            CallsScript.Instance.AssignedWindow(randomIndex);
+            CallsScript.Instance.Bouncing(true);
+            Debug.Log("1");
+        }
+        else if (randomIndex == 2)
+        {
+            CallsScript.Instance.AssignedWindow(randomIndex);
+            CallsScript.Instance.Bouncing(true);
+            Debug.Log("2");
+        }
+        else if (randomIndex == 3)
+        {
+            CallsScript.Instance.AssignedWindow(randomIndex);
+            CallsScript.Instance.Bouncing(true);
+            Debug.Log("3");
+        }
+        else if (randomIndex == 4)
+        {
+            CallsScript.Instance.AssignedWindow(randomIndex);
+            CallsScript.Instance.Bouncing(true);
+            Debug.Log("4");
+        }
+        else if (randomIndex == 5)
+        {
+            CallsScript.Instance.AssignedWindow(randomIndex);
+            CallsScript.Instance.Bouncing(true);
+            Debug.Log("5");
+        }
+        else if (randomIndex == 6)
+        {
+            CallsScript.Instance.AssignedWindow(randomIndex);
+            CallsScript.Instance.Bouncing(true);
+            Debug.Log("6");
+        }
+        //GameEvent eventToSpawn = gameEvents[randomIndex];
 
         // Создаем экземпляр игрового события
-        GameObject eventInstance = Instantiate(eventToSpawn.eventPrefab, transform.position, transform.rotation);
+        //GameObject eventInstance = Instantiate(eventToSpawn.eventPrefab, transform.position, transform.rotation);
 
         // Проверяем, является ли событие объектом с компонентом, отображающим текст
-        EventTextDisplay eventTextDisplay = eventInstance.GetComponent<EventTextDisplay>();
-        if (eventTextDisplay != null)
-        {
-            // Выбираем случайное описание события из массива
-            string randomDescription = eventToSpawn.eventDescriptions[Random.Range(0, eventToSpawn.eventDescriptions.Length)];
-            eventTextDisplay.ShowEventText(randomDescription, eventToSpawn.displayDuration);
-        }
+        /* EventTextDisplay eventTextDisplay = eventInstance.GetComponent<EventTextDisplay>();
+         if (eventTextDisplay != null)
+         {
+             // Выбираем случайное описание события из массива
+             string randomDescription = eventToSpawn.eventDescriptions[Random.Range(0, eventToSpawn.eventDescriptions.Length)];
+             eventTextDisplay.ShowEventText(randomDescription, eventToSpawn.displayDuration);
+         }*/
     }
 }
 
-[System.Serializable]
+/*[System.Serializable]
 public class GameEvent
 {
     public GameObject eventPrefab; // Префаб игрового события
@@ -77,9 +123,9 @@ public class PoliceEvent : GameEvent
 {
     // Дополнительные параметры и логика для ивента "Полиция"
     // ...
-}
+}*/
 
-public class EventTextDisplay : MonoBehaviour
+/*public class EventTextDisplay : MonoBehaviour
 {
     public TextMesh eventText; // Ссылка на компонент TextMesh для отображения текста
 
@@ -102,4 +148,4 @@ public class EventTextDisplay : MonoBehaviour
         yield return new WaitForSeconds(duration);
         eventText.gameObject.SetActive(false); // Скрываем текст
     }
-}
+}*/

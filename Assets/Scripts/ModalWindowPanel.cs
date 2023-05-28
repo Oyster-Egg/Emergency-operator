@@ -53,8 +53,6 @@ public class ModalWindowPanel : MonoBehaviour
     private Button _alternateButton;
     [SerializeField]
     private TextMeshProUGUI _alternateButtonText;
-    [SerializeField]
-    private Color old_color;
 
     private Action onConfirmAction;
     private Action onDeclineAction;
@@ -79,14 +77,14 @@ public class ModalWindowPanel : MonoBehaviour
     public void Close()
     {
         ModalWindowBox.SetActive(false);
-        _background.color = old_color;
     }
 
     public void PauseMenu(string title,string confirmButton, string declineButton, string alternateButton, UnityAction confirmAction, UnityAction declineAction, UnityAction alternateAction = null)
     {
         ModalWindowBox.SetActive(true);
-        old_color = _background.color;
-        _background.color = new Color(0f, 0f, 0f, 0f);
+       Color color = _background.color;
+        color.a = 0;
+        _background.color = color;
         _horizontalLayoutArea.gameObject.SetActive(false);
         _verticalLayoutArea.gameObject.SetActive(false);
         bool hasTitle = string.IsNullOrEmpty(title);
@@ -114,6 +112,9 @@ public class ModalWindowPanel : MonoBehaviour
     public void DialogWindow(string title,string text, string confirmButton, string declineButton, string alternateButton, UnityAction confirmAction, UnityAction declineAction, UnityAction alternateAction = null)
     {
         ModalWindowBox.SetActive(true);
+        Color color = _background.color;
+        color.a = 1;
+        _background.color = color;
         _horizontalLayoutArea.gameObject.SetActive(false);
         _verticalLayoutArea.gameObject.SetActive(true);
         _headerArea.gameObject.SetActive(true);

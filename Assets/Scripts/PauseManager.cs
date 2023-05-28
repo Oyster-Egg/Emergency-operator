@@ -10,9 +10,6 @@ public class PauseManager : MonoBehaviour
     public string confirmButton;
     public string declineButton;
     public string alternateButton;
-    public UnityEvent onContinueEvent;
-    public UnityEvent onCancelEvent;
-    public UnityEvent onAlternateEvent;
 
     public UnityAction ResumeGameAction;
     public UnityAction CancelAction;

@@ -145,7 +145,7 @@ public class CameraController : MonoBehaviour
     { 
         if (Input.mouseScrollDelta.y != 0)
         {
-            newZoom += Input.mouseScrollDelta.y * zoom_amount;
+            newZoom += Input.mouseScrollDelta.y * zoom_amount*15f;
         }
 
         if (Input.GetMouseButtonDown(0))
